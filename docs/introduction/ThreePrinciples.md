@@ -59,6 +59,10 @@ store.dispatch({
 
 Reducers are just pure functions that take the previous state and an action, and return the next state. Remember to return new state objects, instead of mutating the previous state. You can start with a single reducer, and as your app grows, split it off into smaller reducers that manage specific parts of the state tree. Because reducers are just functions, you can control the order in which they are called, pass additional data, or even make reusable reducers for common tasks such as pagination.
 
+
+reducers 接收action和上一个state，进行处理后返回下一个state。通过返回一个新的state 对象,避免直接修改原对象。也可以以一个单独的reducer开始进行开发，随着app规模增长，将其分离为更小的reducers,以更好的管理state tree的特定部分。由于reducers仅仅是函数形式，因此可以控制reducer的调用顺序，传递额外的参数或者是创建可复用的recuders（比如分页）
+
+
 ```js
 
 function visibilityFilter(state = 'SHOW_ALL', action) {
