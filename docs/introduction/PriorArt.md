@@ -11,11 +11,18 @@ Can Redux be considered a [Flux](https://facebook.github.io/flux/) implementatio
 
 Redux was inspired by several important qualities of Flux. Like Flux, Redux prescribes that you concentrate your model update logic in a certain layer of your application (“stores” in Flux, “reducers” in Redux). Instead of letting the application code directly mutate the data, both tell you to describe every mutation as a plain object called an “action”.
 
+Redux受Flux启发。Redux使你专注于应用程序特定层的业务逻辑，通过使用action的方式触发state变更，避免应用程序代码直接操作数据。
+
 Unlike Flux, **Redux does not have the concept of a Dispatcher**. This is because it relies on pure functions instead of event emitters, and pure functions are easy to compose and don’t need an additional entity managing them. Depending on how you view Flux, you may see this as either a deviation or an implementation detail. Flux has often been [described as `(state, action) => state`](https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1). In this sense, Redux is true to the Flux architecture, but makes it simpler thanks to pure functions.
+
+Redux并没有分发器的概念。因为它依赖于pure functions 而不是事件emitters.pure functions 易于处理，并且不需要额外的管理机制。从某种程度上来说，你可以认为Flux是一种偏离离了的设计或者是具体实现。Flux也可以描述为(state,action)=>state的模式。在这个意义上来说，Redux呵Flux的架构是相同的，但是借助于pure functions ，使得Redux更为简便。
 
 Another important difference from Flux is that **Redux assumes you never mutate your data**. You can use plain objects and arrays for your state just fine, but mutating them inside the reducers is strongly discouraged. You should always return a new object, which is easy with the [object spread syntax proposed for ES7](https://github.com/sebmarkbage/ecmascript-rest-spread) and implemented in [Babel](http://babeljs.io), or with a library like [Immutable](https://facebook.github.io/immutable-js).
 
+与Flux的另一个不同之处是Redux不允许操作data.你可以使用简单对象和数组的形式来表现state，然而在reducers中操作data是强烈不鼓励的。你可以使用ES7，Babel，Immutable等方式来返回一个新的object。
+
 While it is technically *possible* to [write impure reducers](https://github.com/rackt/redux/issues/328#issuecomment-125035516) that mutate the data for performance corner cases, we actively discourage you from doing this. Development features like time travel, record/replay, or hot reloading will break. Moreover it doesn’t seem like immutability poses performance problems in most real apps, because, as [Om](https://github.com/omcljs/om) demonstrates, even if you lose out on object allocation, you still win by avoiding expensive re-renders and re-calculations, as you know exactly what changed thanks to reducer purity.
+
 
 ### Elm
 
